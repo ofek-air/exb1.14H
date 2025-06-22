@@ -1,0 +1,15 @@
+node_modules
+**/dist*
+.vs
+node_modules
+.vs
+**/dist*
+/*.*
+!.gitignore
+!*.bat
+z--*
+client/*
+!client/extensions-mlev
+server/*
+!server/*.bat
+!.nvmrc

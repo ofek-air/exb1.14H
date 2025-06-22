@@ -1,0 +1,23 @@
+{
+  "name": "coordinates-org",
+  "label": "Coordinates-Org",
+  "type": "widget",
+  "version": "1.14.0",
+  "exbVersion": "1.14.0",
+  "author": "Esri R&D Center Beijing",
+  "description": "A widget to obtain coordinates from the map or scene.",
+  "copyright": "",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "defaultSize": {
+    "width": 242,
+    "height": 140
+  },
+  "properties": {
+    "hasSettingPage": true
+  },
+  "translatedLocales": [
+    "en",
+    "he"
+  ],
+  "dependency": "jimu-arcgis"
+}

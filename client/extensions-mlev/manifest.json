@@ -1,0 +1,7 @@
+{
+  "name": "extensions-mlev",
+  "type": "exb-web-extension-repo",
+  "description": "Michael Lev's custom EXB extensions",
+  "copyright": "mlev.mail@gmail.com - Michael Lev, at Ofek Air Photography",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0"
+}
