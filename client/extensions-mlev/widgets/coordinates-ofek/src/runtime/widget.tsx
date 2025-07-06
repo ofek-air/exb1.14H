@@ -38,7 +38,7 @@ const { useState, useEffect, useRef } = React
 const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
   const { config, useMapWidgetIds, theme, id, layoutId, layoutItemId, controllerWidgetId } = props//_ml_ add controllerWidgetIdfrom 1.17
   const { coordinateSystem, coordinateDecimal, altitudeDecimal, showSeparators, displayOrder, widgetStyle, mapInfo, mapInfo2,
-    showBaseMapInfo, ofekCfgObliqueAppUrl//_ml_ added line
+    ofekCfgObliqueAppUrl, showBaseMapInfo, showRotation, showScale, showZoom, showTilt//_ml_ added line
   } = config
   const useMapWidgetId = useMapWidgetIds?.[0]//_ml_ copied from 1.17
   const widgetSizeAuto = ReactRedux.useSelector((state: IMState) => {
@@ -985,9 +985,9 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
       if (pItm && pItm.x && pItm.y) {
         if (ofekUtils.isRtlLocale()) {
           let unitMeter = translate('meterAbbr')
-          setItmInfo(`${pItm.y.toFixed(1)} ${pItm.x.toFixed(1)} ${unitMeter} `)
+          setItmInfo(`${pItm.y.toFixed(1)} ${pItm.x.toFixed(1)} ${unitMeter}`)
         } else {
-          setItmInfo(`${pItm.x.toFixed(1)} ${pItm.y.toFixed(1)} m `)
+          setItmInfo(`${pItm.x.toFixed(1)} ${pItm.y.toFixed(1)} m`)
         }
       } else {
         setItmInfo('')
@@ -1118,9 +1118,9 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
     if (pItm && pItm.x && pItm.y) {
       let unitMeter = translate('meterAbbr')
       if (ofekUtils.isRtlLocale()) {
-        setItmInfo(`${pItm.y.toFixed(1)} ${pItm.x.toFixed(1)} ${unitMeter} `)
+        setItmInfo(`${pItm.y.toFixed(1)} ${pItm.x.toFixed(1)} ${unitMeter}`)
       } else {
-        setItmInfo(`${pItm.x.toFixed(1)} ${pItm.y.toFixed(1)} ${unitMeter} `)
+        setItmInfo(`${pItm.x.toFixed(1)} ${pItm.y.toFixed(1)} ${unitMeter}`)
       }
     } else {
       setItmInfo('')
@@ -1351,14 +1351,14 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
   const hasSecondDivider = geoInfo || elevInfo
   //const classicGeo = `${geoInfo}${elevInfo && `${geoInfo && ' | '}${elevInfo}`}${eyeInfo && `${hasSecondDivider && ' | '}${eyeInfo}`}`//_ml_ modified org line replaced
   const classicGeo =//_ml_ modified this is the new line
-    `${itmInfo && `${itmInfo} | `}` +
-    `${showBaseMapInfo ? baseMapInfo && `${baseMapInfo} | ` : ""}` +
-    `${geoInfo}${elevInfo && `${geoInfo && ' | '}${elevInfo} | `}` +
-    `${zoomInfo && ` | ${zoomInfo} | `}` +//_ml_ was `${zoomInfo} | `
-    `${scaleInfo && `${scaleInfo} | `}` +
-    `${eyeInfoAlt && `${eyeInfoAlt} | `}` +
-    `${rotationInfo && `${rotationInfo} | `}` +
-    `${eyeInfoTilt && `${eyeInfoTilt}`}`
+    `${itmInfo && `${itmInfo}`}` +
+    `${showBaseMapInfo && (mapWkid.current !== wkidTMRef.current) ? baseMapInfo && ` | ${baseMapInfo}` : ""}` +
+    ` | ${geoInfo}${elevInfo ? ` | ${elevInfo }` : ""}` +
+    `${showZoom ? ` | ${zoomInfo}` : ""}` +
+    `${showScale && scaleInfo ? ` | ${scaleInfo}` : ""}` +//_ml_ 20250706 - added " | " for Haifa
+    `${eyeInfoAlt && ` | ${eyeInfoAlt}`}` +
+    `${showRotation ? ` | ${rotationInfo}` : ""}` +
+    `${showTilt && eyeInfoTilt ? ` | ${eyeInfoTilt}` : ""}`
   const classicGeoCopyText = `${geoInfo}${elevInfo && `${geoInfo && ' | '}${elevInfo} ${elevUnit}`}${eyeInfo && `${hasSecondDivider && ' | '}${eyeInfo} ${eyeUnit}`}`//_ml_ copied from 1.17
   const classicCoorInfo = showTips ? mapClickTips : (showMouseTips ? mouseMoveTips : classicGeo || enableClickTips)
   const hasElevOrEye = (eyeNum !== null) || (elevNum !== null)
